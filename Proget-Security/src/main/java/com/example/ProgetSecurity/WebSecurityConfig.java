@@ -29,17 +29,14 @@ public class WebSecurityConfig {
 				.roles("USER")
 				.build();
 
-		return new InMemoryUserDetailsManager(user);
+		UserDetails admin= 
+			User.withDefaultPasswordEncoder()
+				.username("admin")
+				.password("admin")
+				.roles("ADMIN")
+				.build();
+		return new InMemoryUserDetailsManager(user, admin);
 	}
 
-	@Bean
-    public UserDetailsService manageAdmin(){
-        UserDetails admin= 
-            User.withDefaultPasswordEncoder()
-                .username("admin")
-                .password("admin")
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(admin);
-    }
+
 }
