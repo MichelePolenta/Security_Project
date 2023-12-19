@@ -8,6 +8,7 @@ public class WebSecurityConfig {
 		http
 			.authorizeHttpRequests((requests) -> requests
 				.requestMatchers("/", "/home").permitAll()
+				.requestMatchers("/admin/**").permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form
@@ -31,6 +32,7 @@ public class WebSecurityConfig {
 		return new InMemoryUserDetailsManager(user);
 	}
 
+	@Bean
     public UserDetailsService manageAdmin(){
         UserDetails admin= 
             User.withDefaultPasswordEncoder()
