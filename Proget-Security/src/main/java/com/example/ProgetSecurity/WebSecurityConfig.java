@@ -30,4 +30,14 @@ public class WebSecurityConfig {
 
 		return new InMemoryUserDetailsManager(user);
 	}
+
+    public UserDetailsService manageAdmin(){
+        UserDetails admin= 
+            User.withDefaultPasswordEncoder()
+                .username("admin")
+                .password("admin")
+                .roles("ADMIN")
+                .build();
+        return new InMemoryUserDetailsManager(admin);
+    }
 }
